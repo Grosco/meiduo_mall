@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'haystack',
     'rest_framework',
+    'rest_framework_simplejwt',
     'corsheaders',
+    'admincenter.apps.AdmincenterConfig',
     'users.apps.UsersConfig',
     'contents.apps.ContentsConfig',
     'verifications.apps.VerificationsConfig',
@@ -279,16 +281,25 @@ CORS_ORIGIN_WHITELIST = (
 # 指明在跨域访问中，后端支持对cookie的操作
 CORS_ALLOW_CREDENTIALS = True
 
-# JWT扩展配置
 REST_FRAMEWORK = {
+    # 异常处理
+    # 'EXCEPTION_HANDLER': 'meiduo_mall.utils.exceptions.exception_handler',
+    # JWT扩展配置
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ),
 }
 
-JWT_AUTH = {
-    #  指明token的有效期
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
+# JWT_AUTH = {
+#     #  指明token的有效期
+#     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
+# }
+SIMPLE_JWT = {
+    # token有效时长(返回的 access 有效时长)
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(seconds=30),
+    # token刷新的有效时间(返回的 refresh 有效时长)
+    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(seconds=20),
 }
+
