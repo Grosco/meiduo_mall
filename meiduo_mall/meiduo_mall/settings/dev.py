@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os.path
 import sys
+import datetime
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -28,7 +29,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 sys.path.insert(0, os.path.join(BASE_DIR, 'meiduo_mall/apps'))
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'haystack',
     'rest_framework',
+    'corsheaders',
     'users.apps.UsersConfig',
     'contents.apps.ContentsConfig',
     'verifications.apps.VerificationsConfig',
@@ -60,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'meiduo_mall.urls'
@@ -268,3 +270,25 @@ HAYSTACK_CONNECTIONS = {
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 # 搜索结果分页每页显示数量
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 5
+
+# 跨域访问的支持
+CORS_ORIGIN_WHITELIST = (
+    'http://127.0.0.1:8080',
+    'http://localhost:8080',
+)
+# 指明在跨域访问中，后端支持对cookie的操作
+CORS_ALLOW_CREDENTIALS = True
+
+# JWT扩展配置
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}
+
+JWT_AUTH = {
+    #  指明token的有效期
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
+}
