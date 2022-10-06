@@ -118,7 +118,7 @@ class LoginView(View):
         if not re.match(r'^[\w\d]{8,20}$', password):
             return HttpResponseForbidden('密码最少8位，最长20位')
         # user = UsernameMobileAuthBackend().authenticate(username=username, password=password)
-        user = authenticate(username=username, password=password)
+        user = authenticate(request, username=username, password=password)
         if not user:
             return render(request, 'login.html', {'account_errmsg': '用户名或密码错误'})
         login(request, user=user)

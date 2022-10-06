@@ -38,6 +38,8 @@ User = get_user_model()
 class UsernameMobileAuthBackend(ModelBackend):
     def authenticate(self, request=None, username=None, password=None, **kwargs):
         print(request)
+        print(type(request))
+        print(dir(request))
         user = self.get_user_by_account(username)
         if user and user.check_password(password):
             return user
