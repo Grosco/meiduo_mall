@@ -15,16 +15,13 @@ User = get_user_model()
 
 class UsernameMobileAuthBackend(ModelBackend):
     def authenticate(self, request=None, username=None, password=None, **kwargs):
-        #  is_admin为False的是Django调用的本方法
-        is_admin = kwargs.get('is_admin', True)
+        #  as_admin为False的是Django调用的本方法
+        as_admin = kwargs.get('as_admin', True)
 
-        if is_admin:
-            # user = self.get_user_by_account(account=username, is_staff=True)
-            user = self.get_user_by_account(account=username, is_staff=False)
-            print('is_admin', user.username)
+        if as_admin:
+            user = self.get_user_by_account(account=username, is_staff=True)
         else:
             user = self.get_user_by_account(account=username, is_staff=False)
-            print('is_not_amdin', user.username)
 
         if user and user.check_password(password):
             return user

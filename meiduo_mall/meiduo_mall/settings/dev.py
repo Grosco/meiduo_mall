@@ -9,6 +9,13 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+
+# 管理员：admin
+# 密码: eSJUgKnDne
+# 用户：mduser
+# 密码: eSJUgKnDne
+
+
 import os.path
 import sys
 import datetime
@@ -302,4 +309,3 @@ SIMPLE_JWT = {
     # token刷新的有效时间(返回的 refresh 有效时长)
     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(seconds=20),
 }
-

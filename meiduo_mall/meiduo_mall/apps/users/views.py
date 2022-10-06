@@ -32,8 +32,6 @@ from .models import Address
 
 # 获取当前用户模型类
 User = get_user_model()
-# 用户名：mduser
-# 密码: eSJUgKnDne
 
 logger = logging.Logger('django')
 
@@ -119,8 +117,8 @@ class LoginView(View):
             return HttpResponseForbidden('密码最少8位，最长20位')
         # user = UsernameMobileAuthBackend().authenticate(username=username, password=password)
         # user = authenticate(username=username, password=password)
-        # 用 is_admin 区分调用authenticate()的是Django还是Simple JWT
-        user = authenticate(request, username=username, password=password,is_admin=False)
+        # 用 as_admin 区分调用authenticate()的是Django还是Simple JWT
+        user = authenticate(request, username=username, password=password, as_admin=False)
         if not user:
             return render(request, 'login.html', {'account_errmsg': '用户名或密码错误'})
         login(request, user=user)
