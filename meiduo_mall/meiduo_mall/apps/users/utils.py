@@ -63,14 +63,14 @@ class UsernameMobileAuthBackend(ModelBackend):
                 return user
 
 
-def jwt_response_payload_handler(token, user=None, request=None):
-    """自定义jwt认证成功返回数据"""
-    data = {
-        'token': token,
-        'id': user.id,
-        'username': user.username
-    }
-    return data
+# def jwt_response_payload_handler(token, user=None, request=None):
+#     """自定义jwt认证成功返回数据"""
+#     data = {
+#         'token': token,
+#         'id': user.id,
+#         'username': user.username
+#     }
+#     return data
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -80,7 +80,6 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token = super(MyTokenObtainPairSerializer, cls).get_token(user)
 
         # Add custom claims
-        token['id'] = user.id
         token['username'] = user.username
         # ...
 
@@ -88,4 +87,8 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 
 class MyTokenObtainPairView(TokenObtainPairView):
+    """
+    {"typ":"JWT","alg":"HS256"}
+    {"token_type":"access","exp":1665052993,"iat":1665052963,"jti":"6531ea46700e441a8e12a4614cbefe14","user_id":21,"username":"mduser"}
+    """
     serializer_class = MyTokenObtainPairSerializer
