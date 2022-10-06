@@ -10,47 +10,30 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 
 User = get_user_model()
 
-# class UsernameMobileAuthBackend(ModelBackend):
-#     def authenticate(self, request=None, username=None, password=None, **kwargs):
-#         user = self.get_user_by_account(username)
-#         if user and user.check_password(password):
-#             return user
-#
-#     @staticmethod
-#     def get_user_by_account(account):
-#         regex = r'^1[3-9]\d{9}$'
-#         if re.match(regex, account):
-#             mobile = account
-#             try:
-#                 user = User.objects.get(mobile=mobile)
-#             except User.DoesNotExist:
-#                 return None
-#             else:
-#                 return user
-#         else:
-#             username = account
-#             try:
-#                 user = User.objects.get(username=username)
-#             except User.DoesNotExist:
-#                 return None
-#             else:
-#                 return user
+
 class UsernameMobileAuthBackend(ModelBackend):
     def authenticate(self, request=None, username=None, password=None, **kwargs):
-        print(request)
-        print(type(request))
-        print(dir(request))
-        user = self.get_user_by_account(username)
+        #  is_admin为False的是Django调用的本方法
+        is_admin = kwargs.get('is_admin', True)
+
+        if is_admin:
+            user = self.get_user_by_account(account=username, is_staff=True)
+        else:
+            user = self.get_user_by_account(account=username, is_staff=False)
+
         if user and user.check_password(password):
             return user
 
     @staticmethod
-    def get_user_by_account(account):
+    def get_user_by_account(account, is_staff):
         regex = r'^1[3-9]\d{9}$'
         if re.match(regex, account):
             mobile = account
             try:
-                user = User.objects.get(mobile=mobile)
+                if is_staff:
+                    user = User.objects.get(mobile=mobile, is_staff=True)
+                else:
+                    user = User.objects.get(mobile=mobile)
             except User.DoesNotExist:
                 return None
             else:
@@ -58,21 +41,14 @@ class UsernameMobileAuthBackend(ModelBackend):
         else:
             username = account
             try:
-                user = User.objects.get(username=username)
+                if is_staff:
+                    user = User.objects.get(username=username, is_staff=True)
+                else:
+                    user = User.objects.get(username=username)
             except User.DoesNotExist:
                 return None
             else:
                 return user
-
-
-# def jwt_response_payload_handler(token, user=None, request=None):
-#     """自定义jwt认证成功返回数据"""
-#     data = {
-#         'token': token,
-#         'id': user.id,
-#         'username': user.username
-#     }
-#     return data
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
