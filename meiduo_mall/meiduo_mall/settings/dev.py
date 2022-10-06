@@ -282,7 +282,7 @@ HAYSTACK_SEARCH_RESULTS_PER_PAGE = 5
 
 # 跨域访问的支持
 CORS_ORIGIN_WHITELIST = (
-    'http://127.0.0.1:8080',
+    'http://127.0.0.1:8000',
     'http://localhost:8080',
 )
 # 指明在跨域访问中，后端支持对cookie的操作
