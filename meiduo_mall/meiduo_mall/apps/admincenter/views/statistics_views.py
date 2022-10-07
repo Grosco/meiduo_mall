@@ -9,7 +9,6 @@ from rest_framework.views import APIView
 
 from admincenter.serializers import GoodsVisitCountSerializer
 from goods.models import GoodsVisitCount
-from orders.models import OrderInfo
 
 # Create your views here.
 
