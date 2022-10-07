@@ -19,4 +19,8 @@ urlpatterns = [
             name='admincenter_statistical_day_active'),
     re_path(r'^statistical/day_orders/$', statistics_views.UserOrderCountView.as_view(),
             name='admincenter_statistical_day_orders'),
+    re_path(r'^statistical/month_increment/$', statistics_views.UserMonthCountView.as_view(),
+            name='admincenter_statistical_month_increment'),
+    re_path(r'^statistical/goods_day_views/$', statistics_views.GoodsDayView.as_view(),
+            name='admincenter_statistical_goods_day_views'),
 ]
