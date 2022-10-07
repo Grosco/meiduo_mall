@@ -24,3 +24,7 @@ class UserTotalCountView(APIView):
             'date': current_date
         }
         return Response(serialized)
+
+
+class UserDayCountView(APIView):
+    pass
