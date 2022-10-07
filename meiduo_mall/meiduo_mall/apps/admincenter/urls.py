@@ -11,4 +11,5 @@ app_name = 'admincenter'
 urlpatterns = [
     # re_path(r'^authorizations/$', TokenObtainPairView.as_view(), name='admincenter_authorizations'),
     re_path(r'^authorizations/$', MyTokenObtainPairView.as_view(), name='admincenter_authorizations'),
+    re_path(r'^statistical/total_count/$', views.UserTotalCountView.as_view(), name='admincenter_statistical_total_count'),
 ]
