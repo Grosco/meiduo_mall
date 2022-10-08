@@ -4,7 +4,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 
 from users.utils import MyTokenObtainPairView
 
-from .views import statistics_views
+from .views import statistics_views, user_views
 
 app_name = 'admincenter'
 
@@ -23,4 +23,6 @@ urlpatterns = [
             name='admincenter_statistical_month_increment'),
     re_path(r'^statistical/goods_day_views/$', statistics_views.GoodsDayView.as_view(),
             name='admincenter_statistical_goods_day_views'),
+
+    re_path(r'^users/$', user_views.UserView.as_view(), name='admincenter_users'),
 ]
