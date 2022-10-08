@@ -19,3 +19,7 @@ class UserViewPagination(PageNumberPagination):
             'pagesize': self.page_size  # 后端指定的页容量
         }
         return Response(serialized)
+
+
+class SpecsViewSetPagination(PageNumberPagination):
+    pass

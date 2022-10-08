@@ -1,10 +1,11 @@
 from django.urls import re_path
 
+from rest_framework import routers
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from users.utils import MyTokenObtainPairView
 
-from .views import statistics_views, user_views
+from .views import statistics_views, user_views, goods_views
 
 app_name = 'admincenter'
 
@@ -25,4 +26,12 @@ urlpatterns = [
             name='admincenter_statistical_goods_day_views'),
 
     re_path(r'^users/$', user_views.UserView.as_view(), name='admincenter_users'),
+
+    # re_path(r'^goods/specs/$', goods_views.SpecsView.as_view(), name='admincenter_goods_specs'),
 ]
+
+router = routers.SimpleRouter()
+router.register(r'goods/specs', goods_views.SpecsViewSet, basename='goods_specs')
+print(router.urls)
+urlpatterns += router.urls
+print(urlpatterns)
