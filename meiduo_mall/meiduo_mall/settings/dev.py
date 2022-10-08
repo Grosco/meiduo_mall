@@ -289,8 +289,6 @@ CORS_ORIGIN_WHITELIST = (
 CORS_ALLOW_CREDENTIALS = True
 
 REST_FRAMEWORK = {
-    # 异常处理
-    # 'EXCEPTION_HANDLER': 'meiduo_mall.utils.exceptions.exception_handler',
     # JWT扩展配置
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -299,10 +297,6 @@ REST_FRAMEWORK = {
     ),
 }
 
-# JWT_AUTH = {
-#     #  指明token的有效期
-#     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
-# }
 SIMPLE_JWT = {
     # token有效时长(返回的 access 有效时长)
     'ACCESS_TOKEN_LIFETIME': datetime.timedelta(days=1),
