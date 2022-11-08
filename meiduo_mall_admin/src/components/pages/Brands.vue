@@ -1,8 +1,8 @@
 <template>
   <div class="brands_wrap">
-    <BreadCrumb crumb="品牌管理"></BreadCrumb>  
+    <BreadCrumb crumb="品牌管理"></BreadCrumb>
     <div class="top_bar">
-       <Addbrands @fnResetTable="fnGetData"></Addbrands>       
+      <Addbrands @fnResetTable="fnGetData"></Addbrands>
     </div>
     <BrandsTable :brands="aBrandsList" @fnResetTable="fnGetData"></BrandsTable>
     <el-pagination
@@ -12,7 +12,7 @@
       :current-page="page"
       style="text-align:center;margin-top:10px"
       @current-change="fnGetPage"
-      >
+    >
     </el-pagination>
   </div>
 </template>
@@ -25,44 +25,44 @@ import cons from '@/components/constant'
 
 export default {
   name: 'Brands',
-  data () {
+  data() {
     return {
-      page:1,
-      pages:8,
-      pagesize:10,
-      aBrandsList:[]
+      page: 1,
+      pages: 8,
+      pagesize: 10,
+      aBrandsList: []
     }
   },
-  components:{
+  components: {
     BreadCrumb,
     Addbrands,
     BrandsTable
   },
-  mounted(){
+  mounted() {
     this.fnGetData(1);
   },
-  methods:{
-    fnGetData:function(num){
+  methods: {
+    fnGetData: function (num) {
       let token = localStorage.token;
       this.axios.get(cons.apis + '/goods/brands/', {
-          headers: {
-            'Authorization': 'JWT ' + token
-          },
-          responseType: 'json',
-          params:{
-            page:num,
-            pagesize:this.pagesize
-          }
+        headers: {
+          'Authorization': 'JWT ' + token
+        },
+        responseType: 'json',
+        params: {
+          page: num,
+          pagesize: this.pagesize
+        }
       })
-      .then(dat=>{
+        .then(dat => {
           this.aBrandsList = dat.data.lists;
           this.page = dat.data.page;
           this.pages = dat.data.pages;
-      }).catch(err=>{
-         console.log(err);
+        }).catch(err => {
+        console.log(err);
       });
-    },   
-    fnGetPage:function(dat){
+    },
+    fnGetPage: function (dat) {
       this.page = dat;
       this.fnGetData(this.page);
     }
@@ -71,9 +71,9 @@ export default {
 </script>
 
 <style scoped>
-.top_bar{
-    width:95.2%;
-    overflow:hidden;
-    margin:10px auto;
-  }
+.top_bar {
+  width: 95.2%;
+  overflow: hidden;
+  margin: 10px auto;
+}
 </style>

@@ -5,17 +5,16 @@
 <script>
 export default {
   name: 'NotFound',
-  data () {
-    return {
-    }
+  data() {
+    return {}
   }
 }
 </script>
 
 <style scoped>
-.errtip{
- font-size:30px;
- margin:30px;
- font-weight:bold;
+.errtip {
+  font-size: 30px;
+  margin: 30px;
+  font-weight: bold;
 }
 </style>

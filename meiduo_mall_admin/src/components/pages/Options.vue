@@ -1,8 +1,8 @@
 <template>
   <div class="options_wrap">
-    <BreadCrumb crumb="规格选项管理"></BreadCrumb>  
+    <BreadCrumb crumb="规格选项管理"></BreadCrumb>
     <div class="top_bar">
-       <AddOptions @fnResetTable="fnGetData"></AddOptions>       
+      <AddOptions @fnResetTable="fnGetData"></AddOptions>
     </div>
     <OptionsTable :options="aOptionsList" @fnResetTable="fnGetData"></OptionsTable>
     <el-pagination
@@ -12,7 +12,7 @@
       :current-page="page"
       style="text-align:center;margin-top:10px"
       @current-change="fnGetPage"
-      >
+    >
     </el-pagination>
   </div>
 </template>
@@ -25,44 +25,44 @@ import cons from '@/components/constant'
 
 export default {
   name: 'Specs',
-  data () {
+  data() {
     return {
-      page:1,
-      pages:8,
-      pagesize:10,
-      aOptionsList:[]
+      page: 1,
+      pages: 8,
+      pagesize: 10,
+      aOptionsList: []
     }
   },
-  components:{
+  components: {
     BreadCrumb,
     AddOptions,
     OptionsTable
   },
-  mounted(){
+  mounted() {
     this.fnGetData(1);
   },
-  methods:{
-    fnGetData:function(num){
+  methods: {
+    fnGetData: function (num) {
       let token = localStorage.token;
       this.axios.get(cons.apis + '/specs/options/', {
-          headers: {
-            'Authorization': 'JWT ' + token
-          },
-          responseType: 'json',
-          params:{
-            page:num,
-            pagesize:this.pagesize
-          }
+        headers: {
+          'Authorization': 'JWT ' + token
+        },
+        responseType: 'json',
+        params: {
+          page: num,
+          pagesize: this.pagesize
+        }
       })
-      .then(dat=>{
+        .then(dat => {
           this.aOptionsList = dat.data.lists;
           this.page = dat.data.page;
           this.pages = dat.data.pages;
-      }).catch(err=>{
-         console.log(err);
+        }).catch(err => {
+        console.log(err);
       });
-    },   
-    fnGetPage:function(dat){
+    },
+    fnGetPage: function (dat) {
       this.page = dat;
       this.fnGetData(this.page);
     }
@@ -71,9 +71,9 @@ export default {
 </script>
 
 <style scoped>
-.top_bar{
-    width:95.2%;
-    overflow:hidden;
-    margin:10px auto;
-  }
+.top_bar {
+  width: 95.2%;
+  overflow: hidden;
+  margin: 10px auto;
+}
 </style>

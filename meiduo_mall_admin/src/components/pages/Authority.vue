@@ -1,8 +1,8 @@
 <template>
   <div class="authority_wrap">
-    <BreadCrumb crumb="权限管理"></BreadCrumb>  
+    <BreadCrumb crumb="权限管理"></BreadCrumb>
     <div class="top_bar">
-       <AddAuthor  @fnResetTable="fnGetData(1)"></AddAuthor>       
+      <AddAuthor @fnResetTable="fnGetData(1)"></AddAuthor>
     </div>
     <AuthorityTable :authors="aAuthorList" @fnResetTable="fnGetData(1)"></AuthorityTable>
     <el-pagination
@@ -12,7 +12,7 @@
       :current-page="page"
       style="text-align:center;margin-top:10px"
       @current-change="fnGetPage"
-      >
+    >
     </el-pagination>
   </div>
 </template>
@@ -26,45 +26,45 @@ import cons from '@/components/constant'
 
 export default {
   name: 'Authority',
-  data () {
+  data() {
     return {
-      page:1,
-      pages:8,
-      pagesize:10,
-      aAuthorList:[]
+      page: 1,
+      pages: 8,
+      pagesize: 10,
+      aAuthorList: []
     }
   },
-  components:{
+  components: {
     BreadCrumb,
     AddAuthor,
     AuthorityTable
   },
-  mounted(){
+  mounted() {
     this.fnGetData(1);
   },
-  methods:{
-    fnGetData:function(num){
+  methods: {
+    fnGetData: function (num) {
       let token = localStorage.token;
       this.axios.get(cons.apis + '/permission/perms/', {
-          headers: {
-            'Authorization': 'JWT ' + token
-          },
-          responseType: 'json',
-          params:{
-            page:num,
-            pagesize:this.pagesize
-          }
+        headers: {
+          'Authorization': 'JWT ' + token
+        },
+        responseType: 'json',
+        params: {
+          page: num,
+          pagesize: this.pagesize
+        }
       })
-      .then(dat=>{
+        .then(dat => {
           //console.log(dat);
           this.aAuthorList = dat.data.lists;
           this.page = dat.data.page;
           this.pages = dat.data.pages;
-      }).catch(err=>{
-         console.log(err);
+        }).catch(err => {
+        console.log(err);
       });
-    },   
-    fnGetPage:function(dat){
+    },
+    fnGetPage: function (dat) {
       this.page = dat;
       this.fnGetData(this.page);
     }
@@ -73,9 +73,9 @@ export default {
 </script>
 
 <style scoped>
-.top_bar{
-    width:95.2%;
-    overflow:hidden;
-    margin:10px auto;
-  }
+.top_bar {
+  width: 95.2%;
+  overflow: hidden;
+  margin: 10px auto;
+}
 </style>

@@ -1,8 +1,8 @@
 <template>
   <div class="pictures_wrap">
-    <BreadCrumb crumb="商品图片管理"></BreadCrumb>  
+    <BreadCrumb crumb="商品图片管理"></BreadCrumb>
     <div class="top_bar">
-       <Addpictures @fnResetTable="fnGetData"></Addpictures>       
+      <Addpictures @fnResetTable="fnGetData"></Addpictures>
     </div>
     <PicturesTable :pictures="aPicturesList" @fnResetTable="fnGetData"></PicturesTable>
     <el-pagination
@@ -12,7 +12,7 @@
       :current-page="page"
       style="text-align:center;margin-top:10px"
       @current-change="fnGetPage"
-      >
+    >
     </el-pagination>
   </div>
 </template>
@@ -25,44 +25,44 @@ import cons from '@/components/constant'
 
 export default {
   name: 'Brands',
-  data () {
+  data() {
     return {
-      page:1,
-      pages:8,
-      pagesize:10,
-      aPicturesList:[]
+      page: 1,
+      pages: 8,
+      pagesize: 10,
+      aPicturesList: []
     }
   },
-  components:{
+  components: {
     BreadCrumb,
     Addpictures,
     PicturesTable
   },
-  mounted(){
+  mounted() {
     this.fnGetData(1);
   },
-  methods:{
-    fnGetData:function(num){
+  methods: {
+    fnGetData: function (num) {
       let token = localStorage.token;
       this.axios.get(cons.apis + '/skus/images/', {
-          headers: {
-            'Authorization': 'JWT ' + token
-          },
-          responseType: 'json',
-          params:{
-            page:num,
-            pagesize:this.pagesize
-          }
+        headers: {
+          'Authorization': 'JWT ' + token
+        },
+        responseType: 'json',
+        params: {
+          page: num,
+          pagesize: this.pagesize
+        }
       })
-      .then(dat=>{
+        .then(dat => {
           this.aPicturesList = dat.data.lists;
           this.page = dat.data.page;
           this.pages = dat.data.pages;
-      }).catch(err=>{
-         console.log(err);
+        }).catch(err => {
+        console.log(err);
       });
-    },   
-    fnGetPage:function(dat){
+    },
+    fnGetPage: function (dat) {
       this.page = dat;
       this.fnGetData(this.page);
     }
@@ -71,9 +71,9 @@ export default {
 </script>
 
 <style scoped>
-.top_bar{
-    width:95.2%;
-    overflow:hidden;
-    margin:10px auto;
-  }
+.top_bar {
+  width: 95.2%;
+  overflow: hidden;
+  margin: 10px auto;
+}
 </style>

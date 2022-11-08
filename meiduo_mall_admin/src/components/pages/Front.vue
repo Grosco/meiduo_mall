@@ -14,24 +14,22 @@ import CountPannel from '@/components/widget/CountPannel'
 import CurveGraph from '@/components/widget/CurveGraph'
 import PieGraph from '@/components/widget/PieGraph'
 import ColumnGraph from '@/components/widget/ColumnGraph'
+
 export default {
   name: 'Front',
-  data () {
-    return {
-    }
+  data() {
+    return {}
   },
-  components:{
+  components: {
     BreadCrumb,
     CountPannel,
     CurveGraph,
     PieGraph,
     ColumnGraph
   },
-  mounted(){
-   
+  mounted() {
+
   },
-  methods:{
-   
-  }
+  methods: {}
 }
 </script>

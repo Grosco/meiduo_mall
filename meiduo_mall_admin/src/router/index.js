@@ -33,92 +33,92 @@ export default new Router({
       path: '/home',
       name: 'Home',
       component: Home,
-      children:[
-          {
-            path:'/home',
-            name: 'Front',
-            component: Front
-          },
-          {
-            path:'/home/front',
-            name: 'Front',
-            component: Front
-          },
-          {
-            path:'/home/user',
-            name: 'User',
-            component: User
-          },
-          {
-            path:'/home/author',
-            name: 'Authority',
-            component: Authority
-          },
-          {
-            path:'/home/group',
-            name: 'Group',
-            component: Group
-          },
-          {
-            path:'/home/admin',
-            name: 'Admin',
-            component: Admin
-          },
-          {
-            path:'/home/sku',
-            name: 'Sku',
-            component: Sku
-          },
-          {
-            path:'/home/spu',
-            name:'Spu',
-            component:Spu
-          },
-          {
-            path:'/home/specs',
-            name:'Specs',
-            component:Specs
-          },
-          {
-            path:'/home/options',
-            name:'Options',
-            component:Options
-          },
-          {
-            path:'/home/channels',
-            name:'Channels',
-            component:Channels
-          },
-          {
-            path:'/home/brands',
-            name:'Brands',
-            component:Brands
-          },
-          {
-            path:'/home/pictures',
-            name:'Pictures',
-            component:Pictures
-          },
-          {
-            path:'/home/spuadd',
-            name:'SpuAdd',
-            component:SpuAdd
-          },
-          {
-            path:'/home/spuedit',
-            name:'SpuEdit',
-            component:SpuEdit
-          },
-          {
-            path:'/home/order',
-            name:'Order',
-            component:Order
-          },
-          {
-            path:'/home/order_detail',
-            name:'OrderDetail',
-            component:OrderDetail
-          }
+      children: [
+        {
+          path: '/home',
+          name: 'Front',
+          component: Front
+        },
+        {
+          path: '/home/front',
+          name: 'Front',
+          component: Front
+        },
+        {
+          path: '/home/user',
+          name: 'User',
+          component: User
+        },
+        {
+          path: '/home/author',
+          name: 'Authority',
+          component: Authority
+        },
+        {
+          path: '/home/group',
+          name: 'Group',
+          component: Group
+        },
+        {
+          path: '/home/admin',
+          name: 'Admin',
+          component: Admin
+        },
+        {
+          path: '/home/sku',
+          name: 'Sku',
+          component: Sku
+        },
+        {
+          path: '/home/spu',
+          name: 'Spu',
+          component: Spu
+        },
+        {
+          path: '/home/specs',
+          name: 'Specs',
+          component: Specs
+        },
+        {
+          path: '/home/options',
+          name: 'Options',
+          component: Options
+        },
+        {
+          path: '/home/channels',
+          name: 'Channels',
+          component: Channels
+        },
+        {
+          path: '/home/brands',
+          name: 'Brands',
+          component: Brands
+        },
+        {
+          path: '/home/pictures',
+          name: 'Pictures',
+          component: Pictures
+        },
+        {
+          path: '/home/spuadd',
+          name: 'SpuAdd',
+          component: SpuAdd
+        },
+        {
+          path: '/home/spuedit',
+          name: 'SpuEdit',
+          component: SpuEdit
+        },
+        {
+          path: '/home/order',
+          name: 'Order',
+          component: Order
+        },
+        {
+          path: '/home/order_detail',
+          name: 'OrderDetail',
+          component: OrderDetail
+        }
       ]
     },
     {

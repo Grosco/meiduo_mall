@@ -1,8 +1,10 @@
 <template>
   <div class="spu_wrap">
-    <BreadCrumb crumb="spu管理"></BreadCrumb>  
+    <BreadCrumb crumb="spu管理"></BreadCrumb>
     <div class="top_bar">
-       <el-button type="primary" class="pull-right"><router-link to="/home/spuadd">新增spu</router-link></el-button>    
+      <el-button type="primary" class="pull-right">
+        <router-link to="/home/spuadd">新增spu</router-link>
+      </el-button>
     </div>
     <SpuTable :spus="aSpuList" @fnResetTable="fnGetData"></SpuTable>
     <el-pagination
@@ -12,7 +14,7 @@
       :current-page="page"
       style="text-align:center;margin-top:10px"
       @current-change="fnGetPage"
-      >
+    >
     </el-pagination>
   </div>
 </template>
@@ -25,43 +27,43 @@ import cons from '@/components/constant'
 
 export default {
   name: 'Spu',
-  data () {
+  data() {
     return {
-      page:1,
-      pages:8,
-      pagesize:10,
-      aSpuList:[]
+      page: 1,
+      pages: 8,
+      pagesize: 10,
+      aSpuList: []
     }
   },
-  components:{
+  components: {
     BreadCrumb,
     SpuTable
   },
-  mounted(){
+  mounted() {
     this.fnGetData(1);
   },
-  methods:{
-    fnGetData:function(num){
+  methods: {
+    fnGetData: function (num) {
       let token = localStorage.token;
       this.axios.get(cons.apis + '/goods/', {
-          headers: {
-            'Authorization': 'JWT ' + token
-          },
-          responseType: 'json',
-          params:{
-            page:num,
-            pagesize:this.pagesize
-          }
+        headers: {
+          'Authorization': 'JWT ' + token
+        },
+        responseType: 'json',
+        params: {
+          page: num,
+          pagesize: this.pagesize
+        }
       })
-      .then(dat=>{
+        .then(dat => {
           this.aSpuList = dat.data.lists;
           this.page = dat.data.page;
           this.pages = dat.data.pages;
-      }).catch(err=>{
-         console.log(err);
+        }).catch(err => {
+        console.log(err);
       });
-    },   
-    fnGetPage:function(dat){
+    },
+    fnGetPage: function (dat) {
       this.page = dat;
       this.fnGetData(this.page);
     }
@@ -70,17 +72,18 @@ export default {
 </script>
 
 <style scoped>
-.top_bar{
-    width:95.2%;
-    overflow:hidden;
-    margin:10px auto;
-  }
-a{
-  display:block;
-  color:#fff;
-  width:90px;
-  line-height:42px;
-  margin:-15px -20px;
+.top_bar {
+  width: 95.2%;
+  overflow: hidden;
+  margin: 10px auto;
+}
+
+a {
+  display: block;
+  color: #fff;
+  width: 90px;
+  line-height: 42px;
+  margin: -15px -20px;
 
 }
 </style>
